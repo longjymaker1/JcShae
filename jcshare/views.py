@@ -2,13 +2,13 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 
-def index(request):
+def Hello_world(request):
     return HttpResponse("Hello World!!")
 
 
-def home(request):
+def index(request):
     return render(request, "index.html")
 
 
-def test(request):
-    pass
+def base_test(request):
+    return render(request, "base.html")
