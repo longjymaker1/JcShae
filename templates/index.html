@@ -1,82 +1,179 @@
 {% extends "base.html" %}
 
+{% block head %}
+    <link rel="stylesheet" href="/static/css/page_style.css">
+{% endblock %}
+
 {% block container %}
     <div class="page-container">
         <div class="container">
+            <div class="cat-nav-wrap">
+                <ul class="cat-nav1">
+                    <li>
+                        <a href="/publish/t">最新发布</a>
+                    </li>
+                    <li>
+                        <a href="/publish/lfjz">楼凤兼职</a>
+                    </li>
+                    <li>
+                        <a href="/publish/xyzx">洗浴中心</a>
+                    </li>
+                    <li>
+                        <a href="/publish/jdhs">酒店会所</a>
+                    </li>
+                    <li>
+                        <a href="/publish/zyfl">足浴发廊</a>
+                    </li>
+                    <li>
+                        <a href="/publish/hdbg">黑店曝光</a>
+                    </li>
+                    <li>
+                        <a href="/publish/jptj">精品推荐</a>
+                    </li>
+                    <li>
+                        <a href="/publish/qq">全国QQ群</a>
+                    </li>
+                    <li>
+                        <a href="/publish/nmyz">男模/鸭子</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="row">
+                <div class="span3">
+                    <div class="city-inbox city-line">
+                        <div class="hd">东北华北</div>
+                        <div class="bd">
+                            <ul class="city-inlist clearfix">
+                                {% for foo in dongbei_huabei %}
+                                    <li><a href="/publish/t/provice/{{ foo.id }}">{{ foo.provices_name }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="span3 articles-list">
+                    <div class="city-inbox city-line">
+                        <div class="hd">华中华东</div>
+                        <div class="bd">
+                            <ul class="city-inlist clearfix">
+                                {% for foo in huazhong_huadong %}
+                                    <li><a href="/publish/t/provice/{{ foo.id }}">{{ foo.provices_name }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="span3 articles-list">
+                    <div class="city-inbox city-line">
+                        <div class="hd">西北西南</div>
+                        <div class="bd">
+                            <ul class="city-inlist clearfix">
+                                {% for foo in xibei_xinan %}
+                                    <li><a href="/publish/t/provice/{{ foo.id }}">{{ foo.provices_name }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="span3 articles-list">
+                    <div class="city-inbox city-line">
+                        <div class="hd">华南其他</div>
+                        <div class="bd">
+                            <ul class="city-inlist clearfix">
+                                {% for foo in huanan_qita %}
+                                    <li><a href="/publish/t/provice/{{ foo.id }}">{{ foo.provices_name }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="row">
                 <!-- start of page content -->
                 <div class="span8 page-content">
                     <!-- Basic Home Page Template -->
                     <div class="row separator">
                         <section class="span4 articles-list">
-                            <h3>点赞最多</h3>
+                            <h3><a href="/like/t">点赞最多</a></h3>
                             <ul class="articles">
-                                <li class="article-entry standard">
-                                    <h4><a href="single.html">Integrating WordPress with Your Website</a></h4>
-                                    <span class="article-meta">25 Feb, 2013 in <a href="single.html" title="View all posts in Server &amp; Database">Server &amp; Database</a></span>
-                                    <span class="like-count">66</span>
-                                </li>
-                                <li class="article-entry standard">
-                                    <h4><a href="single.html">WordPress Site Maintenance</a></h4>
-                                    <span class="article-meta">24 Feb, 2013 in <a href="single.html" title="View all posts in Website Dev">Website Dev</a></span>
-                                    <span class="like-count">15</span>
-                                </li>
-                                <li class="article-entry video">
-                                    <h4><a href="single.html">Meta Tags in WordPress</a></h4>
-                                    <span class="article-meta">23 Feb, 2013 in <a href="single.html" title="View all posts in Website Dev">Website Dev</a></span>
-                                    <span class="like-count">8</span>
-                                </li>
-                                <li class="article-entry image">
-                                    <h4><a href="single.html">WordPress in Your Language</a></h4>
-                                    <span class="article-meta">22 Feb, 2013 in <a href="single.html" title="View all posts in Advanced Techniques">Advanced Techniques</a></span>
-                                    <span class="like-count">6</span>
-                                </li>
-                                <li class="article-entry standard">
-                                    <h4><a href="single.html">Know Your Sources</a></h4>
-                                    <span class="article-meta">22 Feb, 2013 in <a href="single.html" title="View all posts in Website Dev">Website Dev</a></span>
-                                    <span class="like-count">2</span>
-                                </li>
-                                <li class="article-entry standard">
-                                    <h4><a href="single.html">Validating a Website</a></h4>
-                                    <span class="article-meta">21 Feb, 2013 in <a href="single.html" title="View all posts in Website Dev">Website Dev</a></span>
-                                    <span class="like-count">3</span>
-                                </li>
+                                {% for top_art in top_like_article %}
+                                    {% if top_art.main_photo_path == "/" %}
+                                        <li class="article-entry standard">
+                                    {% else %}
+                                        <li class="article-entry image">
+                                    {% endif %}
+                                        <h4><a href="/provice/{{ top_art.provinces_id }}/city/{{ top_art.city_id }}/article_page/{{ top_art.id }}">{{ top_art.title }}</a></h4>
+                                        <span class="article-meta">
+                                            {{ top_art.create_time }}
+                                            <a href="/publish/t/provice/{{ top_art.provinces_id }}/city/0">{{ top_art.provinces.provices_name }}-</a>
+                                            <a href="/publish/t/provice/{{ top_art.provinces_id }}/city/{{ top_art.city_id }}">{{ top_art.city.city_name }}</a>
+                                            {% if top_art.article_type.article_type_name == "楼凤兼职" %}
+                                                <a href="/publish/lfjz">
+                                            {% elif top_art.article_type.article_type_name == "精品推荐" %}
+                                                <a href="/publish/jptj">
+                                            {% elif top_art.article_type.article_type_name == "洗浴中心" %}
+                                                <a href="/publish/xyzx">
+                                            {% elif top_art.article_type.article_type_name == "酒店会所" %}
+                                                <a href="/publish/jdhs">
+                                            {% elif top_art.article_type.article_type_name == "足浴发廊" %}
+                                                <a href="/publish/zyfl">
+                                            {% elif top_art.article_type.article_type_name == "全国QQ群" %}
+                                                <a href="/publish/qq">
+                                            {% elif top_art.article_type.article_type_name == "男模/鸭子" %}
+                                                <a href="/publish/nmyz">
+                                            {% else %}
+                                                <a href="/publish/hdbg">
+                                            {% endif %}
+                                                {{ top_art.article_type.article_type_name }}
+                                            </a>
+                                        </span>
+                                        <span class="like-count">{{ top_art.like_num }}</span>
+                                    </li>
+                                {% endfor %}
                             </ul>
                         </section>
 
                         <section class="span4 articles-list">
-                            <h3>最新上传</h3>
+                            <h3><a href="/publish/t">最新发布</a></h3>
                             <ul class="articles">
-                                <li class="article-entry standard">
-                                    <h4><a href="single.html">Integrating WordPress with Your Website</a></h4>
-                                    <span class="article-meta">25 Feb, 2013 in <a href="single.html" title="View all posts in Server &amp; Database">Server &amp; Database</a></span>
-                                    <span class="like-count">66</span>
-                                </li>
-                                <li class="article-entry standard">
-                                    <h4><a href="single.html">Using Javascript</a></h4>
-                                    <span class="article-meta">25 Feb, 2013 in <a href="single.html" title="View all posts in Advanced Techniques">Advanced Techniques</a></span>
-                                    <span class="like-count">18</span>
-                                </li>
-                                <li class="article-entry image">
-                                    <h4><a href="single.html">Using Images</a></h4>
-                                    <span class="article-meta">25 Feb, 2013 in <a href="single.html" title="View all posts in Designing in WordPress">Designing in WordPress</a></span>
-                                    <span class="like-count">7</span>
-                                </li>
-                                <li class="article-entry video">
-                                    <h4><a href="single.html">Using Video</a></h4>
-                                    <span class="article-meta">24 Feb, 2013 in <a href="single.html" title="View all posts in WordPress Plugins">WordPress Plugins</a></span>
-                                    <span class="like-count">7</span>
-                                </li>
-                                <li class="article-entry standard">
-                                    <h4><a href="single.html">WordPress Site Maintenance</a></h4>
-                                    <span class="article-meta">24 Feb, 2013 in <a href="single.html" title="View all posts in Website Dev">Website Dev</a></span>
-                                    <span class="like-count">15</span>
-                                </li>
-                                <li class="article-entry standard">
-                                    <h4><a href="single.html">WordPress CSS Information and Techniques</a></h4>
-                                    <span class="article-meta">24 Feb, 2013 in <a href="single.html" title="View all posts in Theme Development">Theme Development</a></span>
-                                    <span class="like-count">1</span>
-                                </li>
+                                {% for top_art in top_create_article %}
+                                    {% if top_art.main_photo_path == "/" %}
+                                        <li class="article-entry standard">
+                                    {% else %}
+                                        <li class="article-entry image">
+                                    {% endif %}
+                                        <h4><a href="/provice/{{ top_art.provinces_id }}/city/{{ top_art.city_id }}/article_page/{{ top_art.id }}">{{ top_art.title }}</a></h4>
+                                        <span class="article-meta">
+                                            {{ top_art.create_time }}
+                                            <a href="/publish/t/provice/{{ top_art.provinces_id }}/city/0">{{ top_art.provinces.provices_name }}-</a>
+                                            <a href="/publish/t/provice/{{ top_art.provinces_id }}/city/{{ top_art.city_id }}">{{ top_art.city.city_name }}</a>
+                                            {% if top_art.article_type.article_type_name == "楼凤兼职" %}
+                                                <a href="/publish/lfjz">
+                                            {% elif top_art.article_type.article_type_name == "精品推荐" %}
+                                                <a href="/publish/jptj">
+                                            {% elif top_art.article_type.article_type_name == "洗浴中心" %}
+                                                <a href="/publish/xyzx">
+                                            {% elif top_art.article_type.article_type_name == "酒店会所" %}
+                                                <a href="/publish/jdhs">
+                                            {% elif top_art.article_type.article_type_name == "足浴发廊" %}
+                                                <a href="/publish/zyfl">
+                                            {% elif top_art.article_type.article_type_name == "全国QQ群" %}
+                                                <a href="/publish/qq">
+                                            {% elif top_art.article_type.article_type_name == "男模/鸭子" %}
+                                                <a href="/publish/nmyz">
+                                            {% else %}
+                                                <a href="/publish/hdbg">
+                                            {% endif %}
+                                                {{ top_art.article_type.article_type_name }}
+                                            </a>
+                                        </span>
+                                        <span class="like-count">{{ top_art.like_num }}</span>
+                                    </li>
+                                {% endfor %}
                             </ul>
                         </section>
                     </div>
@@ -89,54 +186,44 @@
 
                     <div class="row separator">
                         <section class="span4 articles-list">
-                            <h3><a href="single.html">楼凤兼职</a> <span>(4)</span></h3>
+                            <h3><a href="/publish/lfjz">楼凤兼职</a></h3>
                             <ul class="articles">
-                                <li class="article-entry image">
-                                    <h4><a href="single.html">New To WordPress &#8211; Where to Start</a></h4>
-                                    <span class="article-meta">24 Feb, 2013 in <a href="single.html" title="View all posts in WordPress for Beginners">WordPress for Beginners</a></span>
-                                    <span class="like-count">1</span>
-                                </li>
-                                <li class="article-entry standard">
-                                    <h4><a href="single.html">Introduction to Blogging</a></h4>
-                                    <span class="article-meta">23 Feb, 2013 in <a href="single.html" title="View all posts in WordPress for Beginners">WordPress for Beginners</a></span>
-                                    <span class="like-count">1</span>
-                                </li>
-                                <li class="article-entry image">
-                                    <h4><a href="single.html">First Steps With WordPress</a></h4>
-                                    <span class="article-meta">22 Feb, 2013 in <a href="single.html" title="View all posts in WordPress for Beginners">WordPress for Beginners</a></span>
-                                    <span class="like-count">0</span>
-                                </li>
-                                <li class="article-entry standard">
-                                    <h4><a href="single.html">Installing WordPress</a></h4>
-                                    <span class="article-meta">21 Feb, 2013 in <a href="single.html" title="View all posts in WordPress for Beginners">WordPress for Beginners</a></span>
-                                    <span class="like-count">1</span>
-                                </li>
+                                {% for art in loufeng %}
+                                    {% if art.main_photo_path == "/" %}
+                                        <li class="article-entry standard">
+                                    {% else %}
+                                        <li class="article-entry image">
+                                    {% endif %}
+                                        <h4><a href="/provice/{{ art.provinces_id }}/city/{{ art.city_id }}/article_page/{{ art.id }}">{{ art.title }}</a></h4>
+                                        <span class="article-meta">
+                                            {{ art.create_time }}
+                                            <a href="/publish/t/provice/{{ art.provinces_id }}/city/0">{{ art.provinces.provices_name }}-</a>
+                                            <a href="/publish/t/provice/{{ art.provinces_id }}/city/{{ art.city_id }}">{{ art.city.city_name }}</a>
+                                        </span>
+                                        <span class="like-count">{{ art.like_num }}</span>
+                                    </li>
+                                {% endfor %}
                             </ul>
                         </section>
 
                         <section class="span4 articles-list">
-                            <h3><a href="single.html">精品推荐</a> <span>(4)</span></h3>
+                            <h3><a href="/publish/jptj">精品推荐</a></h3>
                             <ul class="articles">
-                                <li class="article-entry image">
-                                    <h4><a href="single.html">Using Images</a></h4>
-                                    <span class="article-meta">25 Feb, 2013 in <a href="single.html" title="View all posts in Designing in WordPress">Designing in WordPress</a></span>
-                                    <span class="like-count">7</span>
-                                </li>
-                                <li class="article-entry standard">
-                                    <h4><a href="single.html">Designing Headers</a></h4>
-                                    <span class="article-meta">23 Feb, 2013 in <a href="single.html" title="View all posts in Designing in WordPress">Designing in WordPress</a></span>
-                                    <span class="like-count">1</span>
-                                </li>
-                                <li class="article-entry standard">
-                                    <h4><a href="single.html">Formatting Date and Time</a></h4>
-                                    <span class="article-meta">22 Feb, 2013 in <a href="single.html" title="View all posts in Designing in WordPress">Designing in WordPress</a></span>
-                                    <span class="like-count">0</span>
-                                </li>
-                                <li class="article-entry standard">
-                                    <h4><a href="single.html">Developing a Colour Scheme</a></h4>
-                                    <span class="article-meta">21 Feb, 2013 in <a href="single.html" title="View all posts in Designing in WordPress">Designing in WordPress</a></span>
-                                    <span class="like-count">0</span>
-                                </li>
+                                {% for art in bast_art %}
+                                    {% if art.main_photo_path == "/" %}
+                                        <li class="article-entry standard">
+                                    {% else %}
+                                        <li class="article-entry image">
+                                    {% endif %}
+                                        <h4><a href="/provice/{{ art.provinces_id }}/city/{{ art.city_id }}/article_page/{{ art.id }}">{{ art.title }}</a></h4>
+                                        <span class="article-meta">
+                                            {{ art.create_time }}
+                                            <a href="/publish/t/provice/{{ art.provinces_id }}/city/0">{{ art.provinces.provices_name }}-</a>
+                                            <a href="/publish/t/provice/{{ art.provinces_id }}/city/{{ art.city_id }}">{{ art.city.city_name }}</a>
+                                        </span>
+                                        <span class="like-count">{{ art.like_num }}</span>
+                                    </li>
+                                {% endfor %}
                             </ul>
                         </section>
                     </div>
@@ -144,108 +231,88 @@
                     <div class="row separator">
 
                         <section class="span4 articles-list">
-                            <h3><a href="single.html">洗浴中心</a> <span>(4)</span></h3>
+                            <h3><a href="/publish/xyzx">洗浴中心</a></h3>
                             <ul class="articles">
-                                <li class="article-entry standard">
-                                    <h4><a href="single.html">WordPress CSS Information and Techniques</a></h4>
-                                    <span class="article-meta">24 Feb, 2013 in <a href="single.html" title="View all posts in Theme Development">Theme Development</a></span>
-                                    <span class="like-count">1</span>
-                                </li>
-                                <li class="article-entry image">
-                                    <h4><a href="single.html">Stepping Into Templates</a></h4>
-                                    <span class="article-meta">23 Feb, 2013 in <a href="single.html" title="View all posts in Theme Development">Theme Development</a></span>
-                                    <span class="like-count">0</span>
-                                </li>
-                                <li class="article-entry standard">
-                                    <h4><a href="single.html">Creating Individual Pages</a></h4>
-                                    <span class="article-meta">22 Feb, 2013 in <a href="single.html" title="View all posts in Theme Development">Theme Development</a></span>
-                                    <span class="like-count">0</span>
-                                </li>
-                                <li class="article-entry image">
-                                    <h4><a href="single.html">Uploading Files</a></h4>
-                                    <span class="article-meta">21 Feb, 2013 in <a href="single.html" title="View all posts in Theme Development">Theme Development</a></span>
-                                    <span class="like-count">0</span>
-                                </li>
+                                {% for art in xiyu %}
+                                    {% if art.main_photo_path == "/" %}
+                                        <li class="article-entry standard">
+                                    {% else %}
+                                        <li class="article-entry image">
+                                    {% endif %}
+                                        <h4><a href="/provice/{{ art.provinces_id }}/city/{{ art.city_id }}/article_page/{{ art.id }}">{{ art.title }}</a></h4>
+                                        <span class="article-meta">
+                                            {{ art.create_time }}
+                                            <a href="/publish/t/provice/{{ art.provinces_id }}/city/0">{{ art.provinces.provices_name }}-</a>
+                                            <a href="/publish/t/provice/{{ art.provinces_id }}/city/{{ art.city_id }}">{{ art.city.city_name }}</a>
+                                        </span>
+                                        <span class="like-count">{{ art.like_num }}</span>
+                                    </li>
+                                {% endfor %}
                             </ul>
                         </section>
 
                         <section class="span4 articles-list">
-                            <h3><a href="single.html">酒店会所</a> <span>(4)</span></h3>
+                            <h3><a href="/publish/jdhs">酒店会所</a></h3>
                             <ul class="articles">
-                                <li class="article-entry standard">
-                                    <h4><a href="single.html">WordPress Site Maintenance</a></h4>
-                                    <span class="article-meta">24 Feb, 2013 in <a href="single.html" title="View all posts in Website Dev">Website Dev</a></span>
-                                    <span class="like-count">15</span>
-                                </li>
-                                <li class="article-entry video">
-                                    <h4><a href="single.html">Meta Tags in WordPress</a></h4>
-                                    <span class="article-meta">23 Feb, 2013 in <a href="single.html" title="View all posts in Website Dev">Website Dev</a></span>
-                                    <span class="like-count">8</span>
-                                </li>
-                                <li class="article-entry standard">
-                                    <h4><a href="single.html">Know Your Sources</a></h4>
-                                    <span class="article-meta">22 Feb, 2013 in <a href="single.html" title="View all posts in Website Dev">Website Dev</a></span>
-                                    <span class="like-count">2</span>
-                                </li>
-                                <li class="article-entry standard">
-                                    <h4><a href="single.html">Validating a Website</a></h4>
-                                    <span class="article-meta">21 Feb, 2013 in <a href="single.html" title="View all posts in Website Dev">Website Dev</a></span>
-                                    <span class="like-count">3</span>
-                                </li>
+                                {% for art in jiuduan %}
+                                    {% if art.main_photo_path == "/" %}
+                                        <li class="article-entry standard">
+                                    {% else %}
+                                        <li class="article-entry image">
+                                    {% endif %}
+                                        <h4><a href="/provice={{ art.provinces_id }}/city/{{ art.city_id }}/article_page/{{ art.id }}">{{ art.title }}</a></h4>
+                                        <span class="article-meta">
+                                            {{ art.create_time }}
+                                            <a href="/publish/t/provice/{{ art.provinces_id }}/city/0">{{ art.provinces.provices_name }}-</a>
+                                            <a href="/publish/t/provice/{{ art.provinces_id }}/city/{{ art.city_id }}">{{ art.city.city_name }}</a>
+                                        </span>
+                                        <span class="like-count">{{ art.like_num }}</span>
+                                    </li>
+                                {% endfor %}
                             </ul>
                         </section>
                     </div>
 
                     <div class="row separator">
                         <section class="span4 articles-list">
-                            <h3><a href="single.html">足浴发廊</a> <span>(4)</span></h3>
+                            <h3><a href="/publish/zyfl">足浴发廊</a></h3>
                             <ul class="articles">
-                                <li class="article-entry video">
-                                    <h4><a href="single.html">Using Video</a></h4>
-                                    <span class="article-meta">24 Feb, 2013 in <a href="single.html" title="View all posts in WordPress Plugins">WordPress Plugins</a></span>
-                                    <span class="like-count">7</span>
-                                </li>
-                                <li class="article-entry standard">
-                                    <h4><a href="single.html">Photoblogs and Galleries</a></h4>
-                                    <span class="article-meta">23 Feb, 2013 in <a href="single.html" title="View all posts in WordPress Plugins">WordPress Plugins</a></span>
-                                    <span class="like-count">2</span>
-                                </li>
-                                <li class="article-entry video">
-                                    <h4><a href="single.html">Plugin Resources</a></h4>
-                                    <span class="article-meta">22 Feb, 2013 in <a href="single.html" title="View all posts in WordPress Plugins">WordPress Plugins</a></span>
-                                    <span class="like-count">1</span>
-                                </li>
-                                <li class="article-entry standard">
-                                    <h4><a href="single.html">Managing Plugins</a></h4>
-                                    <span class="article-meta">21 Feb, 2013 in <a href="single.html" title="View all posts in WordPress Plugins">WordPress Plugins</a></span>
-                                    <span class="like-count">0</span>
-                                </li>
+                                {% for art in zuyu %}
+                                    {% if art.main_photo_path == "/" %}
+                                        <li class="article-entry standard">
+                                    {% else %}
+                                        <li class="article-entry image">
+                                    {% endif %}
+                                        <h4><a href="/provice/{{ art.provinces_id }}/city/{{ art.city_id }}/article_page/{{ art.id }}">{{ art.title }}</a></h4>
+                                        <span class="article-meta">
+                                            {{ art.create_time }}
+                                            <a href="/publish/t/provice/{{ art.provinces_id }}/city/0">{{ art.provinces.provices_name }}-</a>
+                                            <a href="/publish/t/provice/{{ art.provinces_id }}/city/{{ art.city_id }}">{{ art.city.city_name }}</a>
+                                        </span>
+                                        <span class="like-count">{{ art.like_num }}</span>
+                                    </li>
+                                {% endfor %}
                             </ul>
                         </section>
 
                         <section class="span4 articles-list">
-                            <h3><a href="single.html">全国QQ群</a> <span>(4)</span></h3>
+                            <h3><a href="/publish/qq">全国QQ群</a></h3>
                             <ul class="articles">
-                                <li class="article-entry standard">
-                                    <h4><a href="single.html">Using Javascript</a></h4>
-                                    <span class="article-meta">25 Feb, 2013 in <a href="single.html" title="View all posts in Advanced Techniques">Advanced Techniques</a></span>
-                                    <span class="like-count">18</span>
-                                </li>
-                                <li class="article-entry video">
-                                    <h4><a href="single.html">Editing Files</a></h4>
-                                    <span class="article-meta">24 Feb, 2013 in <a href="single.html" title="View all posts in Advanced Techniques">Advanced Techniques</a></span>
-                                    <span class="like-count">1</span>
-                                </li>
-                                <li class="article-entry standard">
-                                    <h4><a href="single.html">Importing Content</a></h4>
-                                    <span class="article-meta">23 Feb, 2013 in <a href="single.html" title="View all posts in Advanced Techniques">Advanced Techniques</a></span>
-                                    <span class="like-count">0</span>
-                                </li>
-                                <li class="article-entry image">
-                                    <h4><a href="single.html">WordPress in Your Language</a></h4>
-                                    <span class="article-meta">22 Feb, 2013 in <a href="single.html" title="View all posts in Advanced Techniques">Advanced Techniques</a></span>
-                                    <span class="like-count">6</span>
-                                </li>
+                                {% for art in qq_art %}
+                                    {% if art.main_photo_path == "/" %}
+                                        <li class="article-entry standard">
+                                    {% else %}
+                                        <li class="article-entry image">
+                                    {% endif %}
+                                        <h4><a href="/provice/{{ art.provinces_id }}/city/{{ art.city_id }}/article_page/{{ art.id }}">{{ art.title }}</a></h4>
+                                        <span class="article-meta">
+                                            {{ art.create_time }}
+                                            <a href="/publish/t/provice/{{ art.provinces_id }}/city/0">{{ art.provinces.provices_name }}-</a>
+                                            <a href="/publish/t/provice/{{ art.provinces_id }}/city/{{ art.city_id }}">{{ art.city.city_name }}</a>
+                                        </span>
+                                        <span class="like-count">{{ art.like_num }}</span>
+                                    </li>
+                                {% endfor %}
                             </ul>
                         </section>
                     </div>

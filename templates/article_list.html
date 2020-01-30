@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <link rel="stylesheet" href="/static/css/article_list.css">
+{% endblock %}
+
+
+{% block container %}
+    <div class="tmp"></div>
+    <div class="container_jc">
+        <div class="filters">
+            <div class="filter-item">
+                <span>信息类型</span>
+                <div class="filter">
+                    <a href="#" class="active">全部</a>
+                    <a href="#">楼凤兼职</a>
+                    <a href="#">洗浴中心</a>
+                    <a href="#">酒店会所</a>
+                    <a href="#">足浴发廊</a>
+                    <a href="#">全国QQ群</a>
+                    <a href="#">男模/鸭子</a>
+                    <a href="#">精品推荐</a>
+                    <a href="#">黑点曝光</a>
+                </div>
+            </div>
+            <div class="filter-item">
+                <span>省份</span>
+                <div class="filter">
+                    <a href="#" class="active">全部</a>
+                    {% for pri in provinces %}
+                        <a href="#">{{ pri.provices_name }}</a>
+                    {% endfor %}
+                </div>
+            </div>
+            {% if cities.count > 0 %}
+                <div class="filter-item">
+                    <span>市/区</span>
+                    <div class="filter">
+                        <a href="#" class="active">全部</a>
+                        {% for city in cities %}
+                            <a href="#">{{ city.city_name }}</a>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+            <div class="filter-item">
+                <span>排序</span>
+                <div class="filter">
+                    <a href="#" class="active">最新发布</a>
+                    <a href="#">浏览次数</a>
+                    <a href="#">点赞次数</a>
+                    <a href="#">评论次数</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

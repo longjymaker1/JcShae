@@ -1,0 +1,24 @@
+
+
+html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,
+cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,i,dl,dt,dd,ol,ul,
+li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{
+    margin:0;
+    padding:0;
+    border:0;
+    outline:0;
+    font-size:100%;
+    vertical-align:baseline;
+    background:transparent
+}
+.tmp{margin-bottom: 20px}
+.container_jc{position:relative;margin:0 auto;max-width:1200px;}
+.filters{padding:15px 20px;border: 1px solid #eaeaea;margin-bottom:30px;border-radius: 3px;}
+.filter-item{margin-bottom:7px;padding:0 0 7px 70px;position:relative;border-bottom: 1px dashed #eaeaea;}
+.filter-item:last-child{border-bottom: none;padding-bottom: 0;margin-bottom:0}
+.filter-item>span{font-weight:600;position:absolute;left:0;top:5px}
+.filter{display:inline-block;font-size: 14px;}
+.filter a{display:inline-block;margin:5px;padding:1px 6px 0}
+.filter a.active{background:#1d1d1d;color:#fff;border-radius:2px}
+.filter a.active{background-color:#FF6651 !important;}
+

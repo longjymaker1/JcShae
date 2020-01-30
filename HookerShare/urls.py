@@ -19,6 +19,6 @@ from jcshare import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('jcshare/', include('jcshare.urls')),
+    path('', include('jcshare.urls')),
     # path('', views.home, name='home'),
 ]
