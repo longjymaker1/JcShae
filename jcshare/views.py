@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Central, Provinces, Article, Article_type, City
+import json
 
 
 def Hello_world(request):
@@ -59,14 +60,30 @@ def index(request):
 
 
 def article_list(request, view_type, article_type, provice_id=0, city_id=0):
-    context = {}
+    context = {
+        "view_type": view_type,
+        "article_type": article_type,
+        "provice_id": provice_id,
+        "city_id": city_id,
+    }
     if request.method == "GET":
         provinces = Provinces.objects.all()
         context['provinces'] = provinces
         if provice_id != 0:
             cities = Provinces.objects.get(id=provice_id).pro_city.all()
             context['cities'] = cities
+        # 获取列表数据
+        pass
         return render(request, "article_list.html", context=context)
+    if request.method == "POST":
+        print(view_type)
+        print(article_type)
+        print(provice_id)
+        print(city_id)
+        context = {
+            'result': 'success'
+        }
+        return HttpResponse(json.dumps(context), content_type='application/json')
 
 
 def article(request, article_id, provice_id=0, city_id=0):

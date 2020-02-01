@@ -12,23 +12,25 @@
             <div class="filter-item">
                 <span>信息类型</span>
                 <div class="filter">
-                    <a href="#" class="active">全部</a>
-                    <a href="#">楼凤兼职</a>
-                    <a href="#">洗浴中心</a>
-                    <a href="#">酒店会所</a>
-                    <a href="#">足浴发廊</a>
-                    <a href="#">全国QQ群</a>
-                    <a href="#">男模/鸭子</a>
-                    <a href="#">精品推荐</a>
-                    <a href="#">黑点曝光</a>
+{#                    <a href="#" class="active">全部</a>#}
+                    <a id="t" name="t" onclick="select_list('msg_type', this.name)">全部</a>
+                    <a id="lfjz" name="lfjz" onclick="select_list('msg_type', this.name)">楼凤兼职</a>
+                    <a id="xyzx" name="xyzx" onclick="select_list('msg_type', this.name)">洗浴中心</a>
+                    <a id="jdhs" name="jdhs" onclick="select_list('msg_type', this.name)">酒店会所</a>
+                    <a id="zyfl" name="zyfl" onclick="select_list('msg_type', this.name)">足浴发廊</a>
+                    <a id="qq" name="qq" onclick="select_list('msg_type', this.name)">全国QQ群</a>
+                    <a id="nmyz" name="nmyz" onclick="select_list('msg_type', this.name)">男模/鸭子</a>
+                    <a id="jptj" name="jptj" onclick="select_list('msg_type', this.name)">精品推荐</a>
+                    <a id="hdbg" name="hdbg" onclick="select_list('msg_type', this.name)">黑点曝光</a>
                 </div>
             </div>
             <div class="filter-item">
                 <span>省份</span>
                 <div class="filter">
-                    <a href="#" class="active">全部</a>
+{#                    <a href="#" class="active">全部</a>#}
+                    <a id="provice_0" name="0" onclick="select_list('provice', this.name)">全部</a>
                     {% for pri in provinces %}
-                        <a href="#">{{ pri.provices_name }}</a>
+                        <a id="provice_{{ pri.id }}" name="{{ pri.id }}" onclick="select_list('provice', this.name)">{{ pri.provices_name }}</a>
                     {% endfor %}
                 </div>
             </div>
@@ -36,9 +38,9 @@
                 <div class="filter-item">
                     <span>市/区</span>
                     <div class="filter">
-                        <a href="#" class="active">全部</a>
+                        <a id="city_0" name="0" onclick="select_list('city', this.name)">全部</a>
                         {% for city in cities %}
-                            <a href="#">{{ city.city_name }}</a>
+                            <a id="city_{{ city.id }}" name="{{ city.id }}" onclick="select_list('city', this.name)">{{ city.city_name }}</a>
                         {% endfor %}
                     </div>
                 </div>
@@ -46,13 +48,38 @@
             <div class="filter-item">
                 <span>排序</span>
                 <div class="filter">
-                    <a href="#" class="active">最新发布</a>
-                    <a href="#">浏览次数</a>
-                    <a href="#">点赞次数</a>
-                    <a href="#">评论次数</a>
+                    <a id="publish" name="publish" onclick="select_list('sort_type', this.name)">最新发布</a>
+                    <a id="view" name="view" onclick="select_list('sort_type', this.name)">浏览次数</a>
+                    <a id="like" name="like" onclick="select_list('sort_type', this.name)">点赞次数</a>
+                    <a id="comment" name="comment" onclick="select_list('sort_type', this.name)">评论次数</a>
                 </div>
             </div>
         </div>
     </div>
+{% endblock %}
 
+
+{% block footer %}
+    <script type="text/javascript">
+    var view_type = '{{ view_type }}',
+        article_type = '{{ article_type }}',
+        provice_id = 'provice_' + '{{ provice_id }}',
+        city_id = 'city_' + '{{ city_id }}';
+    var arr_view = document.getElementById(view_type);
+    var arr_article = document.getElementById(article_type);
+    var arr_provice = document.getElementById(provice_id);
+    arr_view.classList.add("active");
+    arr_article.classList.add("active");
+    arr_provice.classList.add("active");
+    if (city_id != 'city_0'){
+        var arr_city = document.getElementById(city_id);
+        arr_city.classList.add("active");
+    }else{
+        var arr_city = document.getElementById("city_0");
+        if (arr_city != null) {
+            arr_city.classList.add("active");
+        }
+    }
+    </script>
+    <script src="/static/js/article_list.js"></script>
 {% endblock %}
