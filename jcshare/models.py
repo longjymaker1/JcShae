@@ -5,6 +5,7 @@ import django.utils.timezone as timezone
 class Article_type(models.Model):
     """模块类型表"""
     article_type_name = models.CharField(max_length=32, verbose_name="板块类型")
+    article_type_alias_name = models.CharField(max_length=32, null=True, verbose_name="板块别名")
     create_time = models.DateTimeField(auto_now_add=True, verbose_name="创建时间")
     edit_time = models.DateTimeField(auto_now=True, verbose_name="修改时间")
 

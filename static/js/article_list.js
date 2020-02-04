@@ -1,13 +1,14 @@
 function select_list(click_type, click_id) {
-    console.log(click_type);
-    console.log(click_id);
     let ids = document.getElementsByClassName('active');
-    console.log('ids长度', ids.length);
-    var msg_types = ids[0].name,
-        provice = ids[1].name,
-        city = ids[2].name;
-    if (ids.length == 4){
-        sort_types = ids[3].name;
+    if (ids.length ===4){
+        var msg_types = ids[0].name,
+            provice = ids[1].name,
+            city = ids[2].name,
+            sort_types = ids[3].name;
+    } else {
+        var msg_types = ids[0].name,
+            provice = ids[1].name,
+            sort_types = ids[2].name;
     }
 
     if (click_type === 'msg_type'){
@@ -21,13 +22,19 @@ function select_list(click_type, click_id) {
         sort_types = click_id;
     }
 
-    let url_arr = [sort_types, msg_types, 'provice', provice, 'city', city];
+    let url_arr;
+    if (ids.length === 4){
+        url_arr = ["127.0.0.1:8000", sort_types, msg_types, 'provice', provice, 'city', city];
+    } else {
+        url_arr = ["127.0.0.1:8000", sort_types, msg_types, 'provice', provice];
+    }
+
     let url_str = url_arr.join("/");
     console.log(url_str);
 
     $.ajax({
         // publish/t/provice/27/city/338
-        url: url_str,
+        url: '',
         type: "POST",
         data: {},
         success: function (result) {
@@ -36,5 +43,6 @@ function select_list(click_type, click_id) {
             }
         }
     })
+    console.log('.......................')
 
 }

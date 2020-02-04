@@ -22,3 +22,42 @@ li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{
 .filter a.active{background:#1d1d1d;color:#fff;border-radius:2px}
 .filter a.active{background-color:#FF6651 !important;}
 
+.grids{margin:0 -10px 20px;position:relative}
+.grids.waterfall{display:block}
+.grids .grid{width:285px;margin:0 10px 20px;float:left;background:#fff;box-shadow:0 0 15px rgba(0,0,0,0.075);position:relative;border-radius:3px;background-size: cover;background-position: center;transition: all .3s ease 0s;}
+.grids .grid:hover{box-shadow:0 0 15px rgba(0,0,0,0.15);-webkit-transform: translateY(-3px);transform: translateY(-3px);}
+.grids .grid.grid-tj:after{content:"推荐";position:absolute;right:10px;top:10px;background:#ff5f33;color:#fff;padding:2px 7px 3px;border-radius:2px;font-size:12px}
+.grids .grid.grid-ts:before{position: absolute;width: 100%;height: 100%;left: 0;top: 0;background: rgba(0,0,0,.3);content: "";border-radius:3px;}
+.grids .grid .img{overflow: hidden;border-radius:3px 3px 0 0;position: relative;}
+.grids .grid .img a{display: block;}
+.grids .grid img{width:100%;height:180px;border-radius: 3px 3px 0 0;transition: all .3s ease-out 0s;}
+.grids .grid img:hover{-webkit-transform: scale(1.03);transform: scale(1.03);transition: all .3s ease-out 0s;}
+.grids .grid.grid-ts img{visibility: hidden;}
+.grids.waterfall .grid img{height:auto !important}
+.grids .grid h3{font-size:15px;font-weight:normal;margin:25px 10px 10px 10px;position:relative;color: black;height: 40px;overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;}
+.grids .grid h3 a{color:#333;}
+.grids .grid h3 a:hover{color:#1d1d1d}
+.cats a{color: blue;font-size: 13px;font-weight: 500;}
+.grids .grid.grid-ts h3 a{color:#fff !important;}
+.grids .grid p{padding:0px 10px 10px;margin:0;color:#999}
+.grids .grid .grid-meta{color:#bbb;padding:0 10px 8px 10px;font-size:12px;height: 26px;overflow: hidden;}
+.grids .grid.grid-ts .grid-meta{color:#fff;position:relative;}
+.grids .grid .grid-meta .price{float:right;}
+.grids .grid .grid-meta .downs, .grids .grid .grid-meta .time, .grids .grid .grid-meta .views, .grids .grid .grid-meta .comments, .grids .grid .grid-meta .favs{margin-right: 10px;}
+.grids .grid .cats{padding:0 10px;font-size:12px;height:18px;overflow:hidden;margin-bottom: 5px;position:relative;}
+.grids .grid.grid-ts .cats a{color:#fff;}
+
+.posts {
+    width:100%;
+    -moz-column-count: 4;
+    -webkit-column-count: 4;
+    column-count: 4;
+}
+.post {
+    margin-bottom:20px;
+    -moz-page-break-inside: avoid;
+    -webkit-column-break-inside: avoid;
+    break-inside: avoid;
+    color:#fff;
+}
+

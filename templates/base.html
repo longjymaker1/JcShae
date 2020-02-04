@@ -124,6 +124,11 @@
         <script type='text/javascript' src='/static/js/jquery.form.js'></script>
         <script type='text/javascript' src='/static/js/jquery.validate.min.js'></script>
         <script type='text/javascript' src='/static/js/custom.js'></script>
+        <script>
+            $.ajaxSetup({
+                data: {csrfmiddlewaretoken: '{{ csrf_token }}' },
+            });
+        </script>
         {% block footer %}
         {% endblock footer %}
     </body>
