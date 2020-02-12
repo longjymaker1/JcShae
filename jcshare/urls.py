@@ -3,7 +3,7 @@ from . import views
 
 
 urlpatterns = [
-    path('Hello_world', views.Hello_world, name='Hello_world'),
+    # path('Hello_world', views.Hello_world, name='Hello_world'),
     path('', views.index, name='index'),
     # path('publish/t', views.article_list),
     re_path(r"^(?P<view_type>publish)/(?P<article_type>\w+)$", views.article_list),

@@ -1,13 +1,10 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import Central, Provinces, Article, Article_type, City
+from .models import Central, Provinces, Article, Article_type
 from django.views.decorators.csrf import csrf_protect
-from django.core.paginator import Paginator,PageNotAnInteger,EmptyPage
+# from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from pure_pagination import Paginator, EmptyPage, PageNotAnInteger
 import json
-
-
-def Hello_world(request):
-    return HttpResponse("Hello World!!")
 
 
 def index(request):
@@ -69,7 +66,6 @@ def article_list(request, view_type, article_type, provice_id=0, city_id=0, page
         "provice_id": int(provice_id),
         "city_id": int(city_id),
     }
-    page_size = 20
     if request.method == "GET":
         provinces = Provinces.objects.order_by("-create_time")
         context['provinces'] = provinces
@@ -77,15 +73,11 @@ def article_list(request, view_type, article_type, provice_id=0, city_id=0, page
             cities = Provinces.objects.get(id=provice_id).pro_city.all()
             context['cities'] = cities
         articles = get_article_list(view_type, article_type, provice_id, city_id)
-        contacts, gd_page, pages_num, pages = create_pages(articles, page_size, page_num)
-        context['articles'] = contacts
-        context['gd_page'] = gd_page
-        context['pages_num'] = pages_num
-        context['pages'] = pages
+
+        contacts = Paginator(articles, 20, request=request)
+        contact = contacts.page(page_num)
+        context['articles'] = contact
         return render(request, "article_list.html", context=context)
-    if request.method == "POST":
-        context['result'] = 'success'
-        return HttpResponse(json.dumps(context), content_type='application/json')
 
 
 def get_article_list(view_type, article_type, provices_id=0, citys_id=0):
@@ -122,17 +114,9 @@ def get_article_list(view_type, article_type, provices_id=0, citys_id=0):
         return articles
 
 
-def create_pages(object_list, per_page, get_page=1):
-    """数据分页"""
-    paginator = Paginator(object_list, per_page)
-    pages = paginator.page_range  # 生成所有页码
-    pages_num = paginator.num_pages  # 总页数
-    gd_page = paginator.page(5)  # 调用指定页面的内容
-    # 当前页并具有处理超出页码范围的状况,页码不是数字返回第一页，超出返回最后一页
-    contacts = paginator.get_page(get_page)
-    return contacts, gd_page, pages_num, pages
-
-
-
 def article(request, article_id, provice_id=0, city_id=0):
-    return render(request, "article.html")
+    context = {}
+    if request.method == "GET":
+        art = Article.objects.get(provinces=provice_id, city=city_id, id=article_id)
+        context['article'] = art
+        return render(request, "article.html", context=context)

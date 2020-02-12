@@ -95,6 +95,17 @@ class Article(models.Model):
     main_photo_path = models.CharField(max_length=128, verbose_name="主图路径", null=True)
     create_time = models.DateTimeField(auto_now_add=True, verbose_name="创建时间")
     edit_time = models.DateTimeField(auto_now=True, verbose_name="修改时间")
+    jc_num = models.CharField(max_length=16, null=True, verbose_name="jc数量")
+    jc_age = models.CharField(max_length=16, null=True, verbose_name="jc年龄")
+    jc_quality = models.CharField(max_length=16, null=True, verbose_name="jc素质")
+    jc_shape = models.CharField(max_length=16, null=True, verbose_name="jc外形")
+    jc_service = models.CharField(max_length=32, null=True, verbose_name="服务项目")
+    jc_business_hours = models.CharField(max_length=32, null=True, verbose_name="营业时间")
+    jc_environment = models.CharField(max_length=32, null=True, verbose_name="环境")
+    jc_security = models.CharField(max_length=32, null=True, verbose_name="安全")
+    jc_address = models.CharField(max_length=64, null=True, verbose_name="地址")
+    jc_contact = models.CharField(max_length=64, null=True, verbose_name="联系方式")
+    jc_detailed = models.CharField(max_length=128, null=True, verbose_name="详细介绍")
 
 
 class article_photo(models.Model):

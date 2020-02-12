@@ -120,3 +120,8 @@
 * 类型名 -- type_name
 * 创建时间 -- create_time (datetime)
 * 修改时间 -- edit_time (datetime)
+
+
+
+
+> 翻页功能  -- django-pure-pagination

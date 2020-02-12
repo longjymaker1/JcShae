@@ -7,31 +7,30 @@
 
 {% block container %}
     <div class="tmp"></div>
+    {% load static %}
     {% csrf_token %}
     <div class="container_jc">
         <div class="filters">
             <div class="filter-item">
                 <span>信息类型</span>
                 <div class="filter">
-{#                    <a href="#" class="active">全部</a>#}
-                    <a id="t" name="t" onclick="select_list('msg_type', this.name)">全部</a>
-                    <a id="lfjz" name="lfjz" onclick="select_list('msg_type', this.name)">楼凤兼职</a>
-                    <a id="xyzx" name="xyzx" onclick="select_list('msg_type', this.name)">洗浴中心</a>
-                    <a id="jdhs" name="jdhs" onclick="select_list('msg_type', this.name)">酒店会所</a>
-                    <a id="zyfl" name="zyfl" onclick="select_list('msg_type', this.name)">足浴发廊</a>
-                    <a id="qq" name="qq" onclick="select_list('msg_type', this.name)">全国QQ群</a>
-                    <a id="nmyz" name="nmyz" onclick="select_list('msg_type', this.name)">男模/鸭子</a>
-                    <a id="jptj" name="jptj" onclick="select_list('msg_type', this.name)">精品推荐</a>
-                    <a id="hdbg" name="hdbg" onclick="select_list('msg_type', this.name)">黑点曝光</a>
+                    <a id="t" title="type" name="t" onclick="select_list('msg_type', this.name)">全部</a>
+                    <a id="lfjz" title="type" name="lfjz" onclick="select_list('msg_type', this.name)">楼凤兼职</a>
+                    <a id="xyzx" title="type" name="xyzx" onclick="select_list('msg_type', this.name)">洗浴中心</a>
+                    <a id="jdhs" title="type" name="jdhs" onclick="select_list('msg_type', this.name)">酒店会所</a>
+                    <a id="zyfl" title="type" name="zyfl" onclick="select_list('msg_type', this.name)">足浴发廊</a>
+                    <a id="qq" title="type" name="qq" onclick="select_list('msg_type', this.name)">全国QQ群</a>
+                    <a id="nmyz" title="type" name="nmyz" onclick="select_list('msg_type', this.name)">男模/鸭子</a>
+                    <a id="jptj" title="type" name="jptj" onclick="select_list('msg_type', this.name)">精品推荐</a>
+                    <a id="hdbg" title="type" name="hdbg" onclick="select_list('msg_type', this.name)">黑点曝光</a>
                 </div>
             </div>
             <div class="filter-item">
                 <span>省份</span>
                 <div class="filter">
-{#                    <a href="#" class="active">全部</a>#}
-                    <a id="provice_0" name="0" onclick="select_list('provice', this.name)">全部</a>
+                    <a id="provice_0" title="provice" name="0" onclick="select_list('provice', this.name)">全部</a>
                     {% for pri in provinces %}
-                        <a id="provice_{{ pri.id }}" name="{{ pri.id }}" onclick="select_list('provice', this.name)">{{ pri.provices_name }}</a>
+                        <a id="provice_{{ pri.id }}" title="provice" name="{{ pri.id }}" onclick="select_list('provice', this.name)">{{ pri.provices_name }}</a>
                     {% endfor %}
                 </div>
             </div>
@@ -39,9 +38,9 @@
                 <div class="filter-item">
                     <span>市/区</span>
                     <div class="filter">
-                        <a id="city_0" name="0" onclick="select_list('city', this.name)">全部</a>
+                        <a id="city_0" title="city" name="0" onclick="select_list('city', this.name)">全部</a>
                         {% for city in cities %}
-                            <a id="city_{{ city.id }}" name="{{ city.id }}" onclick="select_list('city', this.name)">{{ city.city_name }}</a>
+                            <a id="city_{{ city.id }}" title="city" name="{{ city.id }}" onclick="select_list('city', this.name)">{{ city.city_name }}</a>
                         {% endfor %}
                     </div>
                 </div>
@@ -49,10 +48,10 @@
             <div class="filter-item">
                 <span>排序</span>
                 <div class="filter">
-                    <a id="publish" name="publish" onclick="select_list('sort_type', this.name)">最新发布</a>
-                    <a id="view" name="view" onclick="select_list('sort_type', this.name)">浏览次数</a>
-                    <a id="like" name="like" onclick="select_list('sort_type', this.name)">点赞次数</a>
-                    <a id="comment" name="comment" onclick="select_list('sort_type', this.name)">评论次数</a>
+                    <a id="publish" title="sort" name="publish" onclick="select_list('sort_type', this.name)">最新发布</a>
+                    <a id="view" title="sort" name="view" onclick="select_list('sort_type', this.name)">浏览次数</a>
+                    <a id="like" title="sort" name="like" onclick="select_list('sort_type', this.name)">点赞次数</a>
+                    <a id="comment" title="sort" name="comment" onclick="select_list('sort_type', this.name)">评论次数</a>
                 </div>
             </div>
         </div>
@@ -60,16 +59,17 @@
             {% for art in articles %}
                 <div class="post grid">
                     <div class="img">
-                        <a href="#" title="{{ art.title }}" target="_blank" rel="bookmark">
-                            <img src="{{ art.main_photo_path }}" class="thumb" alt="{{ art.title }}">
+                        <a href="/provice/{{ art.provinces_id }}/city/{{ art.city_id }}/article_page/{{ art.id }}" title="{{ art.title }}" target="_blank" rel="bookmark">
+{#                            <img src="{{ art.main_photo_path }}" class="thumb" alt="{{ art.title }}">#}
+                            <img src="{% static art.main_photo_path %}" class="thumb" alt="{{ art.title }}">
                         </a>
                     </div>
                     <h3 itemprop="name headline">
-                        "【"<a href="#" rel="tag">{{ art.article_type.article_type_name }}</a>"】"
-                        <a itemprop="url" rel="bookmark" href="#" title="{{ art.title }}" target="_blank">{{ art.title }}</a>
+                        【<a name="{{ art.article_type.article_type_alias_name }}" rel="tag" onclick="select_list('msg_type', this.name)">{{ art.article_type.article_type_name }}</a>】
+                        <a itemprop="url" rel="bookmark" href="/provice/{{ art.provinces_id }}/city/{{ art.city_id }}/article_page/{{ art.id }}" title="{{ art.title }}" target="_blank">{{ art.title }}</a>
                     </h3>
                     <div class="cats">
-                        <a href="#">地区: {{ art.provinces.provices_name }} - {{ art.city.city_name }}</a>
+                        <a title="city" name="{{ art.city_id }}" onclick="select_list('city', this.name)">地区: {{ art.provinces.provices_name }} - {{ art.city.city_name }}</a>
                     </div>
                     <div class="grid-meta">
                         <span class="time">
@@ -85,17 +85,31 @@
                 </div>
             {% endfor %}
         </div>
-    </div>
+        <div class="pagination">
+            <ul>
+                {% if articles.has_previous %}
+                    <li class="prev-page"><a onclick="go_page({{ articles.previous_page_number }})">上一页</a></li>
+                {% endif %}
 
-    {% if articles.has_previous %}
-        <li>上页: {{ articles.previous_page_number }}</li>
-        <a href="#">上一页</a>
-    {% endif %}
-    <li>当前页码：{{ contacts.number }}</li>
-    {% if articles.has_next %}
-        <li>下页: {{ articles.next_page_number }}</li>
-        <a href="#">下一页</a>
-    {% endif %}
+                {% for pg in articles.pages %}
+                    {% if pg %}
+                        {% ifequal pg articles.number %}
+                            <li class="active"><a href="">{{ pg }}</a></li>
+                        {% else %}
+                            <li><a onclick="go_page({{ pg }})">{{ pg }}</a></li>
+                        {% endifequal %}
+                    {% else %}
+                        <li class="none"><a href="">...</a></li>
+                    {% endif %} 
+                {% endfor %}
+                
+
+                {% if articles.has_next %}
+                    <li class="next-page"><a onclick="go_page({{ articles.next_page_number }})">下一页</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
 
 {% endblock %}
 

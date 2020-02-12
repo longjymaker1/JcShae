@@ -5,5 +5,79 @@
 
 
 {% block container %}
-    <h1>这是详情页</h1>
+    <div class="container" style="transform: none;">
+        <div class="breadcrumbs">
+            当前位置:
+            <span class="sep">
+                <a href="/" itemprop="url">
+                    <span itemprop="title">首页</span>
+                </a>
+            </span>
+            <span class="sep">
+                <i class="dripicons dripicons-chevron-right"> > </i>
+            </span>
+            <span class="sep">
+                <a href="/publish/t/provice/{{ article.provinces_id }}" itemprop="url">
+                    <span itemprop="title">{{ article.provinces.provices_name }}</span>
+                </a>
+            </span>
+            <span class="sep">
+                <i class="dripicons dripicons-chevron-right"> > </i>
+            </span>
+            <span class="sep">
+                <a href="/publish/t/provice/{{ article.provinces_id }}/city/{{ article.city_id }}" itemprop="url">
+                    <span itemprop="title">{{ article.city.city_name }}</span>
+                </a>
+            </span>
+            <span class="sep">
+                <i class="dripicons dripicons-chevron-right"> > </i>
+            </span>
+            <span class="current">
+                正文
+            </span>
+        </div>
+        <div class="content-wrap">
+            <div class="content">
+                <article class="single-content">
+                    <header class="article-header">
+                        <h1 class="article-title">{{ article.title }}</h1>
+                        <div class="article-meta">
+                            <span class="item">
+                                <i class="dripicons dripicons-clock"></i>
+                                {{ article.create_time }}
+                            </span>
+                            <span class="item">
+                                <i class="dripicons dripicons-folder"></i>
+                                <a href="/publish/t/provice/{{ article.provinces_id }}/city/{{ article.city_id }}">{{ article.city.city_name }}</a>
+                            </span>
+                            <span class="item">
+                                <i class="dripicons dripicons-preview"></i>
+                                {{ article.view_num }}
+                            </span>
+                        </div>
+                    </header>
+                    <div style="padding:10px;font-weight: 500;color: #e04a1c;">管理提示：本站所有信息均为网友自行投稿分享，请自行判断真伪，谨防被骗！</div>
+                    <div style="padding: 0px 10px 20px 10px;font-weight: 500;color: #e04a1c;">注意：一切需要提前交定金的均为骗子，请勿轻信！！！</div>
+                    <div class="article-content">
+                        <p> </p>
+                        <div class="aerfb" style="line-height: 2; padding-left: 30px;">
+                            <p>
+                                {{ article.content }}
+                            </p>
+                        </div>
+                    </div>
+                </article>
+                <div class="single-related">
+                    猜你喜欢
+                </div>
+                <div class="single-comment">
+                    评论
+                </div>
+            </div>
+        </div>
+        <aside class="sidebar" style="transform: none;">
+            区域侧边栏
+            <div></div>
+        </aside>
+    </div>
 {% endblock %}
